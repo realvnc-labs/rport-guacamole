@@ -2,9 +2,19 @@ image: debian:11
 
 definitions:
   steps:
-    - step: &build-on-debian
-        name: Build and Publish on Debian
+    - step: &build-on-debian-bullseye
+        name: Build and Publish on Debian Bullseye
         image: debian:11
+        script:
+          - ls -lah
+          - sh 01-resolve-debian-dependencies.sh
+          - sh 02-compile-guacamole.sh
+          - sh 03-create-deb.sh
+          - ls -lah /
+          - sh 04-publish.sh
+    - step: &build-on-debian-buster
+        name: Build and Publish on Debian Buster
+        image: debian:10
         script:
           - ls -lah
           - sh 01-resolve-debian-dependencies.sh
@@ -26,9 +36,18 @@ definitions:
 pipelines:
   tags:
     # git tag debian-$(date +%Y-%m-%d-%H%M%S) -m "Debian build $(date +%c)" && git push --follow-tags
-    # to trigger building the Debian package
+    # to trigger building the Debian packages on Buster and Bullseye
     debian-*:
-      - step: *build-on-debian
+      - step: *build-on-debian-bullseye
+      - step: *build-on-debian-buster
+    # git tag debian-bullseye-$(date +%Y-%m-%d-%H%M%S) -m "Debian build $(date +%c)" && git push --follow-tags
+    # to trigger building the Debian packages on Bullseye
+    debian-bullseye-*:
+      - step: *build-on-debian-bullseye
+    # git tag debian-buster-$(date +%Y-%m-%d-%H%M%S) -m "Debian build $(date +%c)" && git push --follow-tags
+    # to trigger building the Debian packages on Bullseye
+    debian-buster-*:
+      - step: *build-on-debian-buster
     # git tag ubuntu-$(date +%Y-%m-%d-%H%M%S) -m "Ubuntu build $(date +%c)" && git push --follow-tags
     # to trigger building the Ubuntu package
     ubuntu-*:
