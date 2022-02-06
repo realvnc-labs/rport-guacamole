@@ -23,9 +23,19 @@ definitions:
           - ls -lah /
           - sh 04-publish.sh
             
-    - step: &build-on-ubuntu
-        name: Build and Publish on Ubuntu
+    - step: &build-on-ubuntu-focal
+        name: Build and Publish on Ubuntu Focal
         image: ubuntu:20.04
+        script:
+          - sh 01-resolve-debian-dependencies.sh
+          - sh 02-compile-guacamole.sh
+          - sh 03-create-deb.sh
+          - ls -lah
+          - sh 04-publish.sh
+
+    - step: &build-on-ubuntu-bionic
+        name: Build and Publish on Ubuntu Bionic
+        image: ubuntu:18.04
         script:
           - sh 01-resolve-debian-dependencies.sh
           - sh 02-compile-guacamole.sh
@@ -50,5 +60,7 @@ pipelines:
       - step: *build-on-debian-buster
     # git tag ubuntu-$(date +%Y-%m-%d-%H%M%S) -m "Ubuntu build $(date +%c)" && git push --follow-tags
     # to trigger building the Ubuntu package
-    ubuntu-*:
-      - step: *build-on-ubuntu
+    ubuntu-focal*:
+      - step: *build-on-ubuntu-focal
+    ubuntu-bionic*:
+      - step: *build-on-ubuntu-bionic
