@@ -1,0 +1,20 @@
+image: debian:11
+
+definitions:
+  steps:
+    - step: &build-on-debian
+        name: Build and Publish on Debian
+        script:
+          - sh 01-resolve-debian-dependencies.sh
+          - sh 02-compile-guacamole.sh
+          - sh 03-create-deb.sh
+          - ls -lah
+          - >-
+            curl -f -v -u ${BITBUCKET_USERNAME}:${BITBUCKET_APP_PASSWORD}
+            -X POST "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads"
+            -F files=rport-guacamole_1.4.0_debian_bullseye_amd64.deb
+
+pipelines:
+  branches:
+    main:
+      - step: *build-on-debian
