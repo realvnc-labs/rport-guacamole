@@ -33,6 +33,7 @@ INSTALLED_SIZE=$(du -sb ${PKG_ROOT}/|awk '{print $1}')
 #
 # Create package meta data
 #
+GUACA_VERSION="1.4.0"
 mkdir ${PKG_ROOT}/DEBIAN
 cat << EOF > ${PKG_ROOT}/DEBIAN/control
 Package: rport-guacamole
@@ -41,7 +42,7 @@ Maintainer: cloudradar GmbH <info@cloudradar.io>
 Depends: systemd, libcairo2, libjpeg62-turbo, libpng16-16, libwebp6
 Installed-Size: ${INSTALLED_SIZE}
 Architecture: amd64
-Homepage: https://foo.de
+Homepage: https://bitbucket.org/cloudradar/rport-guacamole/src/main/
 Description: guacamole server for the rportd 
  This version of the guacamole server is intented to be used with rportd only.
 EOF
