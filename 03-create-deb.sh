@@ -35,6 +35,7 @@ INSTALLED_SIZE=$(du -sb ${PKG_ROOT}/|awk '{print $1}')
 #
 GUACA_VERSION="1.4.0"
 mkdir ${PKG_ROOT}/DEBIAN
+chmod 0755 ${PKG_ROOT}/DEBIAN
 cat << EOF > ${PKG_ROOT}/DEBIAN/control
 Package: rport-guacamole
 Version: ${GUACA_VERSION}
