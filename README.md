@@ -1,11 +1,12 @@
 # Pre-compiled gucamole server packages
 The repository contains instructions how to compile the gucamole server `guacd` to be used by the rport server.
 
-It also contains ready-to-use packages for 
- * Debian 11 (bullseye) [rport-guacamole_1.4.0_debian_bullseye_amd64.deb](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_bullseye_amd64.deb)
- * Debian 10 (buster) [rport-guacamole_1.4.0_debian_buster_amd64.deb](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_buster_amd64.deb)
- * Ubuntu 20.04 (focal) [rport-guacamole_1.4.0_ubuntu_focal_amd64.deb](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_focal_amd64.deb)
- * Ubuntu 18.04 (bionic) [rport-guacamole_1.4.0_ubuntu_bionic_amd64.deb](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_bionic_amd64.deb)
+It also contains ready-to-use packages for
+
+* Debian 11 (bullseye) [rport-guacamole_1.4.0_debian_bullseye_amd64.deb](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_bullseye_amd64.deb)
+* Debian 10 (buster) [rport-guacamole_1.4.0_debian_buster_amd64.deb](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_buster_amd64.deb)
+* Ubuntu 20.04 (focal) [rport-guacamole_1.4.0_ubuntu_focal_amd64.deb](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_focal_amd64.deb)
+* Ubuntu 18.04 (bionic) [rport-guacamole_1.4.0_ubuntu_bionic_amd64.deb](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_bionic_amd64.deb)
 
 > 🚫 **Do not use any of the above packages to build a fully featured Guacamole server!**
 >
