@@ -20,7 +20,7 @@ cd guacamole-server-${GUACA_VERSION}
 if [ $VERSION_CODENAME = 'buster' ];then
     CONFIGURE_EXTRA='--enable-allow-freerdp-snapshots'
 else
-    $CONFIGURE_EXTRA=''
+    CONFIGURE_EXTRA=''
 fi
 
 ./configure --with-init-dir=/etc/init.d \
