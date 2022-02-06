@@ -3,6 +3,7 @@
 #
 set -e
 apt-get -y update
+cat /etc/os-release
 . /etc/os-release
 if [ $ID = "ubuntu" ];then 
     # Ubuntu package name

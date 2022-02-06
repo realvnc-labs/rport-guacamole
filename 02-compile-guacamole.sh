@@ -15,11 +15,19 @@ else
 fi
 tar xzf guacamole-server-${GUACA_VERSION}.tar.gz
 cd guacamole-server-${GUACA_VERSION}
+
+. /etc/os-release
+if [ $VERSION_CODENAME = 'buster' ];then
+    CONFIGURE_EXTRA='--enable-allow-freerdp-snapshots'
+else
+    $CONFIGURE_EXTRA=''
+fi
+
 ./configure --with-init-dir=/etc/init.d \
 --prefix=/opt/rport-guacamole \
 --disable-kubernetes \
 --enable-static \
---disable-telnet
+--disable-telnet $CONFIGURE_EXTRA
 
 make
 make install
