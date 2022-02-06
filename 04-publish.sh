@@ -1,5 +1,4 @@
 set -e
-set -x
 cd /
 ls -lah
 UPLOAD=$(ls rport-guacamole_*amd64.deb)

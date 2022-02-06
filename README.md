@@ -14,6 +14,17 @@ curl -LO https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacam
 dpkg -i rport-guacamole_1.4.0_debian_bullseye_amd64.deb
 ```
 
+## Install on Ubuntu
+To install the guacamole server from our pre-compiles packages, proceed as follows.
+```bash
+# Resolve dependencies first
+apt install libcairo2 libjpeg-turbo8 libpng16-16 libwebp6 libfontconfig1 libfreetype6
+# Download the package
+curl -LO https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_focal_amd64.deb
+# Install
+dpkg -i rport-guacamole_1.4.0_ubuntu_focal_amd64.deb
+```
+
 To avoid conflics with a potentially already running instance of `guacd` it's installed to `/opt/rport-guacamole`.
 
 ## Compile and package yourself

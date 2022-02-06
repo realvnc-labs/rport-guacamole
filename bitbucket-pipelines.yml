@@ -24,6 +24,12 @@ definitions:
           - sh 04-publish.sh
 
 pipelines:
-  branches:
-    main:
+  tags:
+    # git tag debian-$(date +%Y-%m-%d-%H%M%S) -m "Debian build $(date +%c)" && git push --follow-tags
+    # to trigger building the Debian package
+    debian-*:
       - step: *build-on-debian
+    # git tag ubuntu-$(date +%Y-%m-%d-%H%M%S) -m "Ubuntu build $(date +%c)" && git push --follow-tags
+    # to trigger building the Ubuntu package
+    ubuntu-*:
+      - step: *build-on-ubuntu

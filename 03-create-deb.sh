@@ -33,6 +33,14 @@ INSTALLED_SIZE=$(du -sb ${PKG_ROOT}/|awk '{print $1}')
 #
 # Create package meta data
 #
+. /etc/os-release
+if [ $ID = "ubuntu" ];then 
+    # Ubuntu package name
+    LIB_JPEG="libjpeg-turbo8"
+else
+    # Debian package name
+    LIB_JPEG="libjpeg62-turbo"
+fi
 GUACA_VERSION="1.4.0"
 mkdir ${PKG_ROOT}/DEBIAN
 chmod 0755 ${PKG_ROOT}/DEBIAN
@@ -40,7 +48,7 @@ cat << EOF > ${PKG_ROOT}/DEBIAN/control
 Package: rport-guacamole
 Version: ${GUACA_VERSION}
 Maintainer: cloudradar GmbH <info@cloudradar.io>
-Depends: systemd, libcairo2, libjpeg62-turbo, libpng16-16, libwebp6
+Depends: systemd, libcairo2, ${LIB_JPEG}, libpng16-16, libwebp6
 Installed-Size: ${INSTALLED_SIZE}
 Architecture: amd64
 Homepage: https://bitbucket.org/cloudradar/rport-guacamole/src/main/
