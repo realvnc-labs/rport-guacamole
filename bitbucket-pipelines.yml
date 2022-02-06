@@ -11,7 +11,7 @@ definitions:
           - sh 02-compile-guacamole.sh
           - sh 03-create-deb.sh
           - ls -lah /
-          - sh 04-publish.sh rport-guacamole_1.4.0_debian_bullseye_amd64.deb
+          - sh 04-publish.sh
             
     - step: &build-on-ubuntu
         name: Build and Publish on Ubuntu
@@ -21,7 +21,7 @@ definitions:
           - sh 02-compile-guacamole.sh
           - sh 03-create-deb.sh
           - ls -lah
-          - sh 04-publish.sh rport-guacamole_1.4.0_ubuntu_focal_amd64.deb
+          - sh 04-publish.sh
 
 pipelines:
   branches:
