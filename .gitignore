@@ -48,3 +48,4 @@ Thumbs.db
 *.mov
 *.wmv
 vars.sh
+remote-build.sh

@@ -46,16 +46,18 @@ definitions:
 pipelines:
   tags:
     debian-*:
-      - step: *build-on-debian-bullseye
-      - step: *build-on-debian-buster
+      - parallel:
+        - step: *build-on-debian-bullseye
+        - step: *build-on-debian-buster
     debian-bullseye-*:
       - step: *build-on-debian-bullseye
     debian-buster-*:
       - step: *build-on-debian-buster
     
     ubuntu-*:
-      - step: *build-on-ubuntu-focal
-      - step: *build-on-ubuntu-bionic
+      - parallel:
+        - step: *build-on-ubuntu-focal
+        - step: *build-on-ubuntu-bionic
     ubuntu-focal*:
       - step: *build-on-ubuntu-focal
     ubuntu-bionic*:
