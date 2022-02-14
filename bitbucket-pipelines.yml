@@ -45,22 +45,22 @@ definitions:
 
 pipelines:
   tags:
-    # git tag debian-$(date +%Y-%m-%d-%H%M%S) -m "Debian build $(date +%c)" && git push --follow-tags
-    # to trigger building the Debian packages on Buster and Bullseye
     debian-*:
       - step: *build-on-debian-bullseye
       - step: *build-on-debian-buster
-    # git tag debian-bullseye-$(date +%Y-%m-%d-%H%M%S) -m "Debian build $(date +%c)" && git push --follow-tags
-    # to trigger building the Debian packages on Bullseye
     debian-bullseye-*:
       - step: *build-on-debian-bullseye
-    # git tag debian-buster-$(date +%Y-%m-%d-%H%M%S) -m "Debian build $(date +%c)" && git push --follow-tags
-    # to trigger building the Debian packages on Bullseye
     debian-buster-*:
       - step: *build-on-debian-buster
-    # git tag ubuntu-$(date +%Y-%m-%d-%H%M%S) -m "Ubuntu build $(date +%c)" && git push --follow-tags
-    # to trigger building the Ubuntu package
+    
+    ubuntu-*:
+      - step: *build-on-ubuntu-focal
+      - step: *build-on-ubuntu-bionic
     ubuntu-focal*:
       - step: *build-on-ubuntu-focal
     ubuntu-bionic*:
       - step: *build-on-ubuntu-bionic
+
+    # Exmaples, how to trigger builds
+    # git tag debian-$(date +%Y-%m-%d-%H%M%S) -m "Build $(date +%c)" && git push --follow-tags
+    # to trigger building the Debian packages on Buster and Bullseye

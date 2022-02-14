@@ -6,19 +6,21 @@ test -e $PKG_ROOT && rm -rf $PKG_ROOT
 mkdir -p ${PKG_ROOT}/opt
 mv /opt/rport-guacamole ${PKG_ROOT}/opt
 mkdir -p ${PKG_ROOT}/lib/systemd/system
+mkdir -p ${PKG_ROOT}/etc/default/
 
 #
 # Create a systemd service file
 #
 cat << EOF > ${PKG_ROOT}/lib/systemd/system/rport-guacd.service
 [Unit]
-Description=Guacamole server for rportd.
+Description=Guacamole proxy daemon (guacd) for the rport.
 ConditionFileIsExecutable=/opt/rport-guacamole/sbin/guacd
 
 [Service]
 StartLimitInterval=5
 StartLimitBurst=10
-ExecStart=/opt/rport-guacamole/sbin/guacd -f -b 127.0.0.1 -l 9445
+EnvironmentFile=/etc/default/rport-guacamole
+ExecStart=/opt/rport-guacamole/sbin/guacd -f -b \$RPORT_GUACD_BIND -l \$RPORT_GUACD_PORT
 LimitNOFILE=1048576
 User=daemon
 Restart=always
@@ -26,6 +28,19 @@ RestartSec=120
 
 [Install]
 WantedBy=multi-user.target
+EOF
+
+cat << EOF > ${PKG_ROOT}/etc/default/rport-guacamole
+#
+# Environment read by rport-guacd.service
+#
+
+# TCP Port used by the guacd
+RPORT_GUACD_PORT=9445
+
+# IP address used to bind the guacd
+RPORT_GUACD_BIND=127.0.0.1
+
 EOF
 
 INSTALLED_SIZE=$(du -sb ${PKG_ROOT}/|awk '{print $1}')
@@ -52,8 +67,9 @@ Depends: systemd, libcairo2, ${LIB_JPEG}, libpng16-16, libwebp6
 Installed-Size: ${INSTALLED_SIZE}
 Architecture: amd64
 Homepage: https://bitbucket.org/cloudradar/rport-guacamole/src/main/
-Description: guacamole server for the rportd 
+Description: Guacamole proxy daemon (guacd) for the rport server daemon
  This version of the guacamole server is intented to be used with rportd only.
+ The only configuration file is /etc/default/rport-guacamole
 EOF
 
 #
@@ -81,10 +97,11 @@ chmod 0555 ${PKG_ROOT}/DEBIAN/prerm
 # Build the debian package
 #
 . /etc/os-release
-PKG_NAME=rport-guacamole_${GUACA_VERSION}_${ID}_${VERSION_CODENAME}_amd64.deb
+PKG_NAME=rport-guacamole_${GUACA_VERSION}_${ID}_${VERSION_CODENAME}_$(uname -m).deb
 cd /
 dpkg-deb -v --build ${PKG_ROOT}
 mv ${PKG_ROOT}.deb /${PKG_NAME}
+echo "Created $PKG_NAME"
 
 ## Check the content of the package
 dpkg-deb -c /${PKG_NAME}

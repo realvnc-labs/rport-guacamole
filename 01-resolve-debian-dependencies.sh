@@ -17,7 +17,7 @@ if [ $VERSION_CODENAME = "bionic" ];then
 else
     EXTRA_PKGS=''
 fi
-DEBIAN_FRONTEND=noninteractive apt-get -y install ${LIB_JPEG} libcairo2-dev libpng-dev libtool-bin \
+DEBIAN_FRONTEND=noninteractive sudo apt-get -y install ${LIB_JPEG} libcairo2-dev libpng-dev libtool-bin \
  libavcodec-dev libavformat-dev libavutil-dev \
  freerdp2-dev libpango1.0-dev libssh2-1-dev libtelnet-dev \
  libvncserver-dev libpulse-dev libssl-dev libuuid1 \
