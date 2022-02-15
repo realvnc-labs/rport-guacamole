@@ -97,6 +97,7 @@ cat << EOF >${PKG_ROOT}/DEBIAN/prerm
 #!/bin/sh
 systemctl stop rport-guacd.service
 systemctl disable rport-guacd.service
+shopt -s dotglob
 rm -rf /opt/rport-guacamole/tmp/*
 EOF
 chmod 0555 ${PKG_ROOT}/DEBIAN/prerm
