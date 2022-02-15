@@ -125,7 +125,7 @@ EOF
 #
 # Create a changelog, even dummy
 #
-cat << EOF |gzip --best -c > ${PKG_ROOT}/usr/share/doc/${PKG_NAME}/changelog.gz
+cat << EOF |gzip -n --best -c > ${PKG_ROOT}/usr/share/doc/${PKG_NAME}/changelog.gz
 rport-guacamole; urgency=low
 
   * Non-maintainer upload.
