@@ -1,6 +1,8 @@
 DEBIAN_FRONTEND=noninteractive apt-get -y install lintian >/dev/null
+cd /
+DEB_FILE=$(ls rport-guacamole_*.deb)
+echo "Lintian for $DEB_FILE"
 . /etc/os-release
-DEB_FILE=/rport-guacamole_1.4.0_debian_bullseye_amd64.deb
 case $VERSION_CODENAME in
     bullseye)
         lintian -X files/hierarchy/standard $DEB_FILE
