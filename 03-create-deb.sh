@@ -96,6 +96,10 @@ echo "ARCH = ${ARCH}"
 GUACA_VERSION="1.4.0"
 mkdir ${PKG_ROOT}/DEBIAN
 chmod 0755 ${PKG_ROOT}/DEBIAN
+
+#
+# Create the package control file
+#
 cat << EOF > ${PKG_ROOT}/DEBIAN/control
 Package: rport-guacamole
 Version: ${GUACA_VERSION}
@@ -118,11 +122,15 @@ cat << EOF > ${PKG_ROOT}/DEBIAN/conffiles
 /etc/default/rport-guacamole
 EOF
 
+#
+# Create a changelog, even dummy
+#
 cat << EOF |gzip --best -c > ${PKG_ROOT}/usr/share/doc/${PKG_NAME}/changelog.gz
 rport-guacamole; urgency=low
 
   * Non-maintainer upload.
 EOF
+chmod 0644 ${PKG_ROOT}/usr/share/doc/${PKG_NAME}/changelog.gz
 
 cat << EOF > ${PKG_ROOT}/usr/share/doc/${PKG_NAME}/copyright
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
@@ -134,6 +142,7 @@ Files: *
 Copyright: 2022
 License:  Apache-2
 EOF
+chmod 0644 ${PKG_ROOT}/usr/share/doc/${PKG_NAME}/copyright
 
 #
 # Create a postinst script
