@@ -37,10 +37,24 @@ dpkg -i rport-guacamole_1.4.0_ubuntu_${VERSION_CODENAME}_$(uname -m).deb
 ```
 
 To avoid conflics with a potentially already running instance of `guacd` it's installed to `/opt/rport-guacamole`.
-By default `guacd` listens only on localhost port 9445.
+By default `guacd` listens only on localhost port 9445. To change the port, edit `/etc/default/rport-guacamole`. 
 
 ## Compile and package yourself
 If you prefer to compile and package yourself, just execute the scripts of the repository on your machine.
+
+### Popular pitfalls
+
+If you compile your self, heed the following advice:
+
+* `guacd` writes some files on the fly into $HOME. Not all users have a writable home directory. The user `daemon` for example cannot write files to $HOME.
+* The `guacd` sometimes can't find the needed rdp libraries. Pass the library path when starting.
+
+Example:
+```bash
+HOME=/tmp LD_LIBRARY_PATH=/opt/rport-guacamole/lib /opt/rport-guacamole/sbin/guacd -v
+```
+
+The pre-compiled packages ship with a systemd service that does all the above in the background.
 
 ## License
 The [Apache Guacamole™ source code](https://guacamole.apache.org/) is released under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).

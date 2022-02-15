@@ -7,7 +7,7 @@ mkdir -p ${PKG_ROOT}/opt
 mv /opt/rport-guacamole ${PKG_ROOT}/opt
 mkdir -p ${PKG_ROOT}/lib/systemd/system
 mkdir -p ${PKG_ROOT}/etc/default/
-mkdir -p ${PKG_ROOT}/tmp
+mkdir -p ${PKG_ROOT}/opt/rport-guacamole/tmp
 
 #
 # /etc/ld.so.conf.d/rport-guacd.conf
@@ -97,6 +97,7 @@ cat << EOF >${PKG_ROOT}/DEBIAN/prerm
 #!/bin/sh
 systemctl stop rport-guacd.service
 systemctl disable rport-guacd.service
+rm -rf /opt/rport-guacamole/tmp/*
 EOF
 chmod 0555 ${PKG_ROOT}/DEBIAN/prerm
 
