@@ -3,10 +3,10 @@ The repository contains instructions how to compile the gucamole server `guacd` 
 
 It also contains ready-to-use packages for
 
-* Debian 11 (bullseye) [rport-guacamole_1.4.0_debian_bullseye_amd64.deb](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_bullseye_amd64.deb)
-* Debian 10 (buster) [rport-guacamole_1.4.0_debian_buster_amd64.deb](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_buster_amd64.deb)
-* Ubuntu 20.04 (focal) [rport-guacamole_1.4.0_ubuntu_focal_amd64.deb](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_focal_amd64.deb)
-* Ubuntu 18.04 (bionic) [rport-guacamole_1.4.0_ubuntu_bionic_amd64.deb](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_bionic_amd64.deb)
+* Debian 11 (bullseye) [x86_64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_bullseye_x86_64.deb) [aarch64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_bullseye_aatch64.deb)
+* Debian 10 (buster) [x86_64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_buster_x86_64.deb) [aarch64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_buster_aarch64.deb) [armv7l](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_buster_armv7l.deb)
+* Ubuntu 20.04 (focal) [x86_64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_focal_x86_64.deb) [aarch64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_focal_aarch64.deb)
+* Ubuntu 18.04 (bionic) [x86_64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_bionic_x86_64.deb)
 
 > 🚫 **Do not use any of the above packages to build a fully featured Guacamole server!**
 >
@@ -21,7 +21,7 @@ apt install libcairo2 libjpeg62-turbo libpng16-16 libwebp6 libfontconfig1 libfre
 . /etc/os-release
 curl -LO https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_${VERSION_CODENAME}_$(uname -m).deb
 # Install
-dpkg -i rport-guacamole_1.4.0_debian_${VERSION_CODENAME}_amd64.deb
+dpkg -i rport-guacamole_1.4.0_debian_${VERSION_CODENAME}_$(uname -m).deb
 ```
 
 ## Install packages on Ubuntu
@@ -33,7 +33,7 @@ apt install libcairo2 libjpeg-turbo8 libpng16-16 libwebp6 libfontconfig1 libfree
 . /etc/os-release
 curl -LO https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_${VERSION_CODENAME}_$(uname -m).deb
 # Install
-dpkg -i rport-guacamole_1.4.0_ubuntu_${VERSION_CODENAME}_amd64.deb
+dpkg -i rport-guacamole_1.4.0_ubuntu_${VERSION_CODENAME}_$(uname -m).deb
 ```
 
 To avoid conflics with a potentially already running instance of `guacd` it's installed to `/opt/rport-guacamole`.

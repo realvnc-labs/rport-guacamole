@@ -7,6 +7,11 @@ mkdir -p ${PKG_ROOT}/opt
 mv /opt/rport-guacamole ${PKG_ROOT}/opt
 mkdir -p ${PKG_ROOT}/lib/systemd/system
 mkdir -p ${PKG_ROOT}/etc/default/
+mkdir -p ${PKG_ROOT}/tmp
+
+#
+# /etc/ld.so.conf.d/rport-guacd.conf
+# /opt/rport-guacamole/lib
 
 #
 # Create a systemd service file
@@ -17,11 +22,10 @@ Description=Guacamole proxy daemon (guacd) for the rport.
 ConditionFileIsExecutable=/opt/rport-guacamole/sbin/guacd
 
 [Service]
-StartLimitInterval=5
-StartLimitBurst=10
+Environment=HOME=/opt/rport-guacamole/tmp
+Environment=LD_LIBRARY_PATH=/opt/rport-guacamole/lib
 EnvironmentFile=/etc/default/rport-guacamole
-ExecStart=/opt/rport-guacamole/sbin/guacd -f -b \$RPORT_GUACD_BIND -l \$RPORT_GUACD_PORT
-LimitNOFILE=1048576
+ExecStart=/opt/rport-guacamole/sbin/guacd -f -b \${RPORT_GUACD_BIND} -l \${RPORT_GUACD_PORT}
 User=daemon
 Restart=always
 RestartSec=120
@@ -29,6 +33,7 @@ RestartSec=120
 [Install]
 WantedBy=multi-user.target
 EOF
+chmod 0644 ${PKG_ROOT}/lib/systemd/system/rport-guacd.service
 
 cat << EOF > ${PKG_ROOT}/etc/default/rport-guacamole
 #
@@ -42,6 +47,7 @@ RPORT_GUACD_PORT=9445
 RPORT_GUACD_BIND=127.0.0.1
 
 EOF
+chmod 0644 ${PKG_ROOT}/etc/default/rport-guacamole
 
 INSTALLED_SIZE=$(du -sb ${PKG_ROOT}/|awk '{print $1}')
 
@@ -77,6 +83,7 @@ EOF
 #
 cat << EOF >${PKG_ROOT}/DEBIAN/postinst
 #!/bin/sh
+chown daemon:daemon /opt/rport-guacamole/tmp
 systemctl daemon-reload
 systemctl start rport-guacd.service
 systemctl enable rport-guacd.service
