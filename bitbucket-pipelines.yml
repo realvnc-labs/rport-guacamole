@@ -10,7 +10,7 @@ definitions:
           - sh 01-resolve-debian-dependencies.sh
           - sh 02-compile-guacamole.sh
           - sh 03-create-deb.sh
-          - sh 04-lintian.sh /
+          - sh 04-lintian.sh
           - sh 99-publish.sh
     - step: &build-on-debian-buster
         name: Build and Publish on Debian Buster
@@ -20,7 +20,6 @@ definitions:
           - sh 01-resolve-debian-dependencies.sh
           - sh 02-compile-guacamole.sh
           - sh 03-create-deb.sh
-          - sh 04-lintian.sh /
           - sh 99-publish.sh
             
     - step: &build-on-ubuntu-focal
