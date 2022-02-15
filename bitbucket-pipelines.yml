@@ -6,22 +6,22 @@ definitions:
         name: Build and Publish on Debian Bullseye
         image: debian:11
         script:
-          - ls -lah
+          - sh 04-lintian.sh
           - sh 01-resolve-debian-dependencies.sh
           - sh 02-compile-guacamole.sh
           - sh 03-create-deb.sh
-          - ls -lah /
-          - sh 04-publish.sh
+          - sh 04-lintian.sh /
+          - sh 99-publish.sh
     - step: &build-on-debian-buster
         name: Build and Publish on Debian Buster
         image: debian:10
         script:
-          - ls -lah
+          - sh 04-lintian.sh
           - sh 01-resolve-debian-dependencies.sh
           - sh 02-compile-guacamole.sh
           - sh 03-create-deb.sh
-          - ls -lah /
-          - sh 04-publish.sh
+          - sh 04-lintian.sh /
+          - sh 99-publish.sh
             
     - step: &build-on-ubuntu-focal
         name: Build and Publish on Ubuntu Focal
@@ -30,8 +30,8 @@ definitions:
           - sh 01-resolve-debian-dependencies.sh
           - sh 02-compile-guacamole.sh
           - sh 03-create-deb.sh
-          - ls -lah
-          - sh 04-publish.sh
+          - sh 04-lintian.sh
+          - sh 99-publish.sh
 
     - step: &build-on-ubuntu-bionic
         name: Build and Publish on Ubuntu Bionic
@@ -40,8 +40,8 @@ definitions:
           - sh 01-resolve-debian-dependencies.sh
           - sh 02-compile-guacamole.sh
           - sh 03-create-deb.sh
-          - ls -lah
-          - sh 04-publish.sh
+          - sh 04-lintian.sh
+          - sh 99-publish.sh
 
 pipelines:
   tags:

@@ -16,7 +16,7 @@ It also contains ready-to-use packages for
 To install the Guacamole Proxy Daemon from pre-compiled packages, proceed as follows.
 ```bash
 # Resolve dependencies first
-apt install libcairo2 libjpeg62-turbo libpng16-16 libwebp6 libfontconfig1 libfreetype6 libfreerdp-client2-2
+apt install libcairo2 libjpeg62-turbo libpng16-16 libwebp6 libfontconfig1 libfreetype6 libfreerdp-client2-2 libssh2-1
 # Download the package
 . /etc/os-release
 curl -LO https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_${VERSION_CODENAME}_$(uname -m).deb
@@ -28,7 +28,7 @@ dpkg -i rport-guacamole_1.4.0_debian_${VERSION_CODENAME}_$(uname -m).deb
 To install the Guacamole Proxy Daemon from our pre-compiled packages, proceed as follows.
 ```bash
 # Resolve dependencies first
-apt install libcairo2 libjpeg-turbo8 libpng16-16 libwebp6 libfontconfig1 libfreetype6 libfreerdp-client2-2
+apt install libcairo2 libjpeg-turbo8 libpng16-16 libwebp6 libfontconfig1 libfreetype6 libfreerdp-client2-2 libssh2-1
 # Download the package
 . /etc/os-release
 curl -LO https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_${VERSION_CODENAME}_$(uname -m).deb
