@@ -1,5 +1,5 @@
-# Pre-compiled guacamole server packages
-The repository contains instructions how to compile the guacamole server `guacd` to be used by the rport server.
+# Pre-compiled Guacamole Proxy Daemon packages
+The repository contains instructions how to compile the Guacamole Proxy Daemon `guacd` to be used by the rport server.
 
 It also contains ready-to-use packages for
 
@@ -8,15 +8,15 @@ It also contains ready-to-use packages for
 * Ubuntu 20.04 (focal) [x86_64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_focal_x86_64.deb) [aarch64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_focal_aarch64.deb)
 * Ubuntu 18.04 (bionic) [x86_64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_bionic_x86_64.deb)
 
-> 🚫 **Do not use any of the above packages to build a fully featured Guacamole server!**
+> 🚫 **Do not use any of the above packages to build a fully featured Guacamole Proxy Daemon!**
 >
-> The packages are only suitable to run in combination with the [rportd](https://github.com/cloudradar-monitoring/rport).
+> The packages are only suitable to run in combination with [rportd](https://github.com/cloudradar-monitoring/rport).
 
 ## Install packages on Debian
-To install the guacamole server from our pre-compiled packages, proceed as follows.
+To install the Guacamole Proxy Daemon from pre-compiled packages, proceed as follows.
 ```bash
 # Resolve dependencies first
-apt install libcairo2 libjpeg62-turbo libpng16-16 libwebp6 libfontconfig1 libfreetype6
+apt install libcairo2 libjpeg62-turbo libpng16-16 libwebp6 libfontconfig1 libfreetype6 libfreerdp-client2-2
 # Download the package
 . /etc/os-release
 curl -LO https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_${VERSION_CODENAME}_$(uname -m).deb
@@ -25,10 +25,10 @@ dpkg -i rport-guacamole_1.4.0_debian_${VERSION_CODENAME}_$(uname -m).deb
 ```
 
 ## Install packages on Ubuntu
-To install the guacamole server from our pre-compiled packages, proceed as follows.
+To install the Guacamole Proxy Daemon from our pre-compiled packages, proceed as follows.
 ```bash
 # Resolve dependencies first
-apt install libcairo2 libjpeg-turbo8 libpng16-16 libwebp6 libfontconfig1 libfreetype6
+apt install libcairo2 libjpeg-turbo8 libpng16-16 libwebp6 libfontconfig1 libfreetype6 libfreerdp-client2-2
 # Download the package
 . /etc/os-release
 curl -LO https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_${VERSION_CODENAME}_$(uname -m).deb
