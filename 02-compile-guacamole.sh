@@ -23,10 +23,12 @@ else
     CONFIGURE_EXTRA=''
 fi
 
-./configure --with-init-dir=/etc/init.d \
+./configure \
 --prefix=/opt/rport-guacamole \
 --disable-kubernetes \
 --enable-static \
+--disable-guaclog \
+--with-freerdp-plugin-dir=/opt/rport-guacamole/lib/freerdp2 \
 --disable-telnet $CONFIGURE_EXTRA
 
 make
