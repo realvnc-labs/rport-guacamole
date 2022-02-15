@@ -14,8 +14,8 @@ mkdir -p ${PKG_ROOT}/usr/share/doc/${PKG_NAME}
 #
 # Fix file modes
 #
-find ${PKG_ROOT}/opt/rport-guacamole/ -type d -exec chmod 0755 {} \;
-find ${PKG_ROOT}/opt/rport-guacamole/ -type f -exec chmod 0644 {} \;
+find ${PKG_ROOT} -type d -exec chmod 0755 {} \;
+find ${PKG_ROOT} -type f -exec chmod 0644 {} \;
 chmod 0755 ${PKG_ROOT}/opt/rport-guacamole/sbin/guacd
 
 if stat ${PKG_ROOT}/opt/rport-guacamole/sbin/guacd|grep "Access.*0755";then
