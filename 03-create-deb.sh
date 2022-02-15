@@ -1,12 +1,4 @@
 #
-# Fix file modes
-#
-find /opt/rport-guacamole/ -type d -exec chmod 0755 {} \;
-find /opt/rport-guacamole/ -type f -exec chmod 0644 {} \;
-chmod 0755 /opt/rport-guacamole/sbin/guacd
-
-
-#
 # Create folder structure
 #
 PKG_NAME=rport-guacamole
@@ -19,6 +11,23 @@ mkdir -p ${PKG_ROOT}/etc/default/
 mkdir -p ${PKG_ROOT}/opt/rport-guacamole/tmp
 mkdir -p ${PKG_ROOT}/usr/share/doc/${PKG_NAME}
 
+#
+# Fix file modes
+#
+find ${PKG_ROOT}/opt/rport-guacamole/ -type d -exec chmod 0755 {} \;
+find ${PKG_ROOT}/opt/rport-guacamole/ -type f -exec chmod 0644 {} \;
+chmod 0755 ${PKG_ROOT}/opt/rport-guacamole/sbin/guacd
+
+if stat ${PKG_ROOT}/opt/rport-guacamole/sbin/guacd|grep "Access.*0755";then
+    true
+else
+    echo "File permission not set"
+    ls -la ${PKG_ROOT}/opt/rport-guacamole/sbin/
+    ls -la ${PKG_ROOT}/opt/rport-guacamole/lib/
+    false
+fi
+
+find ${PKG_ROOT} -type f -name "*.la" -exec rm {} \;
 find ${PKG_ROOT} -type f -name "*.so*" -exec strip {} \;
 strip ${PKG_ROOT}/opt/rport-guacamole/sbin/guacd
 #
