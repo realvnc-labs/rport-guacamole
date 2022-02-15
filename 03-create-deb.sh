@@ -62,6 +62,20 @@ else
     # Debian package name
     LIB_JPEG="libjpeg62-turbo"
 fi
+
+case $(uname -m) in 
+    x86_64)
+        ARCH='amd64'
+        ;;
+    armv7l)
+        ARCH='armhf'
+        ;;
+    aarch64)
+        ARCH='arm64'
+        ;;
+esac
+echo "ARCH = ${ARCH}"
+
 GUACA_VERSION="1.4.0"
 mkdir ${PKG_ROOT}/DEBIAN
 chmod 0755 ${PKG_ROOT}/DEBIAN
@@ -69,12 +83,14 @@ cat << EOF > ${PKG_ROOT}/DEBIAN/control
 Package: rport-guacamole
 Version: ${GUACA_VERSION}
 Maintainer: cloudradar GmbH <info@cloudradar.io>
-Depends: systemd, libcairo2, ${LIB_JPEG}, libpng16-16, libwebp6
+Depends: systemd, libcairo2, ${LIB_JPEG}, libpng16-16, libwebp6, libfreerdp-client2-2
 Installed-Size: ${INSTALLED_SIZE}
-Architecture: amd64
+Architecture: ${ARCH}
+Section: misc
+Priority: optional
 Homepage: https://bitbucket.org/cloudradar/rport-guacamole/src/main/
 Description: Guacamole proxy daemon (guacd) for the rport server daemon
- This version of the guacamole server is intented to be used with rportd only.
+ This version of the Guacamole Proxy Daemon is intented to be used with rportd only.
  The only configuration file is /etc/default/rport-guacamole
 EOF
 
@@ -100,6 +116,15 @@ systemctl disable rport-guacd.service
 rm -rf /opt/rport-guacamole/tmp
 EOF
 chmod 0555 ${PKG_ROOT}/DEBIAN/prerm
+
+#
+# Create a postrm script
+#
+cat << EOF >${PKG_ROOT}/DEBIAN/postrm
+#!/bin/sh
+test -e /opt||mkdir /opt
+EOF
+chmod 0555 ${PKG_ROOT}/DEBIAN/postrm
 
 #
 # Build the debian package
