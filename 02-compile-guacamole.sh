@@ -2,9 +2,10 @@
 # Download and build
 #
 set -e
+cd /tmp
+rm -rf guacamole-server*||true
 GUACA_VERSION="1.4.0"
 CHECK_SUM="2789075c8b25e5aa42dec505491d3425b7b2fe2051772b0006860c26e8a57b90  guacamole-server-1.4.0.tar.gz"
-cd /tmp
 curl -L "https://apache.org/dyn/closer.lua/guacamole/${GUACA_VERSION}/source/guacamole-server-${GUACA_VERSION}.tar.gz?action=download" \
 -o guacamole-server-${GUACA_VERSION}.tar.gz
 if [ "$(sha256sum guacamole-server-${GUACA_VERSION}.tar.gz)" = "$CHECK_SUM" ];then 
