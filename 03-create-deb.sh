@@ -84,7 +84,7 @@ case $(uname -m) in
     x86_64)
         ARCH='amd64'
         ;;
-    armvl7)
+    armv7l)
         ARCH='armhf'
         ;;
     aarch64)
