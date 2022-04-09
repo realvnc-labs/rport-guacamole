@@ -3,12 +3,14 @@ The repository contains instructions how to compile the Guacamole Proxy Daemon `
 
 It also contains ready-to-use packages for
 
-* Debian 11 (bullseye) [x86_64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_bullseye_x86_64.deb) [aarch64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_bullseye_aatch64.deb)
-* Debian 10 (buster) [x86_64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_buster_x86_64.deb) [aarch64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_buster_aarch64.deb) [armv7l](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_buster_armv7l.deb)
-* Ubuntu 20.04 (focal) [x86_64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_focal_x86_64.deb) [aarch64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_focal_aarch64.deb)
-* Ubuntu 18.04 (bionic) [x86_64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_bionic_x86_64.deb)
+Distribution | Version | Architectures
+-------------|---------|--------------
+ Debian      | 11 (bullseye) | [x86_64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_bullseye_x86_64.deb) [aarch64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_bullseye_aatch64.deb) [armv7l](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_bullseye_armv7l.deb)
+Debian       |10 (buster) |  [x86_64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_buster_x86_64.deb) [aarch64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_buster_aarch64.deb) [armv7l](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_debian_buster_armv7l.deb)
+Ubuntu       |20.04 (focal) | [x86_64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_focal_x86_64.deb) [aarch64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_focal_aarch64.deb) [amrv7l](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_focal_armv7l.deb)
+Ubuntu      | 18.04 (bionic) | [x86_64](https://bitbucket.org/cloudradar/rport-guacamole/downloads/rport-guacamole_1.4.0_ubuntu_bionic_x86_64.deb)
 
-> 🚫 **Do not use any of the above packages to build a fully featured Guacamole Proxy Daemon!**
+> 🚫 **Do not use any of the above packages to build a fully featured Guacamole Server!**
 >
 > The packages are only suitable to run in combination with [rportd](https://github.com/cloudradar-monitoring/rport).
 
@@ -41,6 +43,17 @@ By default, `guacd` listens only on localhost port 9445. To change the port, edi
 
 ## Compile and package yourself
 If you prefer to compile and package yourself, just execute the scripts of the repository on your machine.
+
+To compile and build the Debian packages fastly, proceed as shown below.
+```
+export DEBIAN_FRONTEND=noninteractive
+git clone https://cloudradar@bitbucket.org/cloudradar/rport-guacamole.git
+cd port-guacamole
+sh 01-resolve-debian-dependencies.sh
+sh 02-compile-guacamole.sh
+sh 03-create-deb.sh
+sh 04-lintian.sh
+```
 
 ### Popular pitfalls
 
