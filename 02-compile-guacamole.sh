@@ -4,8 +4,8 @@
 set -e
 cd /tmp
 rm -rf guacamole-server*||true
-GUACA_VERSION="1.4.0"
-CHECK_SUM="2789075c8b25e5aa42dec505491d3425b7b2fe2051772b0006860c26e8a57b90  guacamole-server-1.4.0.tar.gz"
+GUACA_VERSION="1.5.0"
+CHECK_SUM="c6c09e4056f1edd88a3c425ef05043ff835da5c1c92348bbdbf5a99e512f5fd4  guacamole-server-1.5.0.tar.gz"
 curl -L "https://apache.org/dyn/closer.lua/guacamole/${GUACA_VERSION}/source/guacamole-server-${GUACA_VERSION}.tar.gz?action=download" \
 -o guacamole-server-${GUACA_VERSION}.tar.gz
 if [ "$(sha256sum guacamole-server-${GUACA_VERSION}.tar.gz)" = "$CHECK_SUM" ];then 

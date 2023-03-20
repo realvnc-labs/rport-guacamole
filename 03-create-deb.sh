@@ -93,7 +93,7 @@ case $(uname -m) in
 esac
 echo "ARCH = ${ARCH}"
 
-GUACA_VERSION="1.4.0"
+GUACA_VERSION="1.5.0"
 mkdir ${PKG_ROOT}/DEBIAN
 chmod 0755 ${PKG_ROOT}/DEBIAN
 
