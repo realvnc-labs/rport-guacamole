@@ -36,3 +36,9 @@ make
 make install
 LD_LIBRARY_PATH=/opt/rport-guacamole/lib /opt/rport-guacamole/sbin/guacd -v
 find /opt
+
+echo "=============================================================================="
+echo ""
+echo "  Guacd successfully compiled"
+echo ""
+echo "=============================================================================="

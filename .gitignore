@@ -16,13 +16,6 @@ dist/
 # Log files
 *.log
 
-# Package files
-*.jar
-
-# Maven
-target/
-dist/
-
 # JetBrains IDE
 .idea/
 
@@ -47,5 +40,4 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
-vars.sh
-remote-build.sh
+remote-build.txt

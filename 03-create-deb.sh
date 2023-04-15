@@ -18,7 +18,7 @@ find ${PKG_ROOT} -type d -exec chmod 0755 {} \;
 find ${PKG_ROOT} -type f -exec chmod 0644 {} \;
 chmod 0755 ${PKG_ROOT}/opt/rport-guacamole/sbin/guacd
 
-if stat ${PKG_ROOT}/opt/rport-guacamole/sbin/guacd|grep "Access.*0755";then
+if stat ${PKG_ROOT}/opt/rport-guacamole/sbin/guacd | grep "Access.*0755"; then
     true
 else
     echo "File permission not set"
@@ -33,7 +33,7 @@ strip ${PKG_ROOT}/opt/rport-guacamole/sbin/guacd
 #
 # Create a systemd service file
 #
-cat << EOF > ${PKG_ROOT}/lib/systemd/system/rport-guacd.service
+cat <<EOF >${PKG_ROOT}/lib/systemd/system/rport-guacd.service
 [Unit]
 Description=Guacamole proxy daemon (guacd) for the rport.
 ConditionFileIsExecutable=/opt/rport-guacamole/sbin/guacd
@@ -52,7 +52,7 @@ WantedBy=multi-user.target
 EOF
 chmod 0644 ${PKG_ROOT}/lib/systemd/system/rport-guacd.service
 
-cat << EOF > ${PKG_ROOT}/etc/default/rport-guacamole
+cat <<EOF >${PKG_ROOT}/etc/default/rport-guacamole
 #
 # Environment read by rport-guacd.service
 #
@@ -66,13 +66,13 @@ RPORT_GUACD_BIND=127.0.0.1
 EOF
 chmod 0644 ${PKG_ROOT}/etc/default/rport-guacamole
 
-INSTALLED_SIZE=$(du -sb ${PKG_ROOT}/|awk '{print $1}')
+INSTALLED_SIZE=$(du -sb ${PKG_ROOT}/ | awk '{print $1}')
 
 #
 # Create package meta data
 #
 . /etc/os-release
-if [ $ID = "ubuntu" ];then 
+if [ $ID = "ubuntu" ]; then
     # Ubuntu package name
     LIB_JPEG="libjpeg-turbo8"
 else
@@ -80,16 +80,25 @@ else
     LIB_JPEG="libjpeg62-turbo"
 fi
 
-case $(uname -m) in 
-    x86_64)
-        ARCH='amd64'
-        ;;
-    armv7l)
-        ARCH='armhf'
-        ;;
-    aarch64)
-        ARCH='arm64'
-        ;;
+case $VERSION_CODENAME in
+jammy)
+    LIB_WEBP=libwebp7
+    ;;
+*)
+    LIB_WEBP=libwebp6
+    ;;
+esac
+
+case $(uname -m) in
+x86_64)
+    ARCH='amd64'
+    ;;
+armv7l)
+    ARCH='armhf'
+    ;;
+aarch64)
+    ARCH='arm64'
+    ;;
 esac
 echo "ARCH = ${ARCH}"
 
@@ -100,39 +109,39 @@ chmod 0755 ${PKG_ROOT}/DEBIAN
 #
 # Create the package control file
 #
-cat << EOF > ${PKG_ROOT}/DEBIAN/control
+cat <<EOF >${PKG_ROOT}/DEBIAN/control
 Package: rport-guacamole
 Version: ${GUACA_VERSION}
-Maintainer: cloudradar GmbH <info@cloudradar.io>
-Depends: libc6, systemd, libcairo2, ${LIB_JPEG}, libpng16-16, libwebp6, libfreerdp-client2-2, libssh2-1
+Maintainer: RealVNC Limited <info@rport.io>
+Depends: libc6, systemd, libcairo2, ${LIB_JPEG}, libpng16-16, libfreerdp-client2-2, libssh2-1, ${LIB_WEBP}
 Installed-Size: ${INSTALLED_SIZE}
 Architecture: ${ARCH}
 Section: misc
 Priority: optional
-Homepage: https://bitbucket.org/cloudradar/rport-guacamole/src/main/
+Homepage: https://github.com/realvnc-labs/rport-guacamole/
 Description: Guacamole proxy daemon (guacd) for the rport server daemon
- This version of guacd is intented to be used with rportd only.
+ This version of guacd is intended to be used with rportd only.
  The only configuration file is /etc/default/rport-guacamole.
 EOF
 
 #
 # List of config files
 #
-cat << EOF > ${PKG_ROOT}/DEBIAN/conffiles
+cat <<EOF >${PKG_ROOT}/DEBIAN/conffiles
 /etc/default/rport-guacamole
 EOF
 
 #
 # Create a changelog, even dummy
 #
-cat << EOF |gzip -n --best -c > ${PKG_ROOT}/usr/share/doc/${PKG_NAME}/changelog.gz
+cat <<EOF | gzip -n --best -c >${PKG_ROOT}/usr/share/doc/${PKG_NAME}/changelog.gz
 rport-guacamole; urgency=low
 
   * Non-maintainer upload.
 EOF
 chmod 0644 ${PKG_ROOT}/usr/share/doc/${PKG_NAME}/changelog.gz
 
-cat << EOF > ${PKG_ROOT}/usr/share/doc/${PKG_NAME}/copyright
+cat <<EOF >${PKG_ROOT}/usr/share/doc/${PKG_NAME}/copyright
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Source: https://apache.org/dyn/closer.lua/guacamole/
 Copyright: 2022
@@ -147,7 +156,7 @@ chmod 0644 ${PKG_ROOT}/usr/share/doc/${PKG_NAME}/copyright
 #
 # Create a postinst script
 #
-cat << EOF >${PKG_ROOT}/DEBIAN/postinst
+cat <<EOF >${PKG_ROOT}/DEBIAN/postinst
 #!/bin/sh
 set -e
 chown daemon:daemon /opt/rport-guacamole/tmp
@@ -164,7 +173,7 @@ chmod 0555 ${PKG_ROOT}/DEBIAN/postinst
 #
 # Create a prerm script
 #
-cat << EOF >${PKG_ROOT}/DEBIAN/prerm
+cat <<EOF >${PKG_ROOT}/DEBIAN/prerm
 #!/bin/sh
 set -e
 deb-systemd-invoke stop rport-guacd.service
@@ -176,7 +185,7 @@ chmod 0555 ${PKG_ROOT}/DEBIAN/prerm
 #
 # Create a postrm script
 #
-cat << EOF >${PKG_ROOT}/DEBIAN/postrm
+cat <<EOF >${PKG_ROOT}/DEBIAN/postrm
 #!/bin/sh
 set -e
 test -e /opt||mkdir /opt
@@ -195,3 +204,9 @@ echo "Created $PKG_NAME in $PKG_FILE"
 
 ## Check the content of the package
 dpkg-deb -c /${PKG_FILE}
+
+echo "======================================================================================================"
+echo ""
+echo "  Successfully created debian package ${PKG_FILE}"
+echo ""
+echo "======================================================================================================"
