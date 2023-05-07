@@ -47,7 +47,7 @@ If you prefer to compile and package yourself, just execute the scripts of the r
 To compile and build the Debian packages quickly, proceed as shown below.
 ```
 export DEBIAN_FRONTEND=noninteractive
-git clone https://cloudradar@bitbucket.org/cloudradar/rport-guacamole.git
+git clone https://github.com/realvnc-labs/rport-guacamole.git
 cd port-guacamole
 sh 01-resolve-debian-dependencies.sh
 sh 02-compile-guacamole.sh
