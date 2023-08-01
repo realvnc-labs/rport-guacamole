@@ -81,7 +81,7 @@ else
 fi
 
 case $VERSION_CODENAME in
-jammy)
+jammy|bookworm)
     LIB_WEBP=libwebp7
     ;;
 *)
