@@ -5,9 +5,9 @@ It also contains [ready-to-use binary packages](https://github.com/realvnc-labs/
 
 Go to [the release downloads](https://github.com/realvnc-labs/rport-guacamole/releases/tag/1.5.0) and grab the package for your distribution.
 
-> 🚫 **Do not use any of the above packages to build a fully featured Guacamole Server!**
+> 🚫 **Do not use any of the packages to build a fully featured Guacamole Server!**
 >
-> The packages are only suitable to run in combination with [rportd](https://github.com/cloudradar-monitoring/rport).
+> The packages are only suitable to run in combination with [rportd](https://github.com/realvnc-labs/rport).
 
 ## Install packages on Debian
 To install the Guacamole Proxy Daemon from pre-compiled packages, proceed as follows.
@@ -30,11 +30,16 @@ apt install libcairo2 libjpeg-turbo8 libpng16-16 libfontconfig1 libfreetype6 lib
 . /etc/os-release
 curl -LO https://github.com/realvnc-labs/rport-guacamole/releases/download/1.5.0/rport-guacamole_1.5.0_ubuntu_${VERSION_CODENAME}_$(uname -m).deb
 # Install
-dpkg -i rport-guacamole_1.4.0_ubuntu_${VERSION_CODENAME}_$(uname -m).deb
+dpkg -i rport-guacamole_1.5.0_ubuntu_${VERSION_CODENAME}_$(uname -m).deb
 ```
 
 To avoid conflicts with a potentially already running instance of `guacd` it's installed to `/opt/rport-guacamole`.
 By default, `guacd` listens only on localhost port 9445. To change the port, edit `/etc/default/rport-guacamole`. 
+
+## Update from 1.4.0
+To update from 1.4.0 to the latest version, just download the package for your distribution and architecture and install with `dpkg -i <PACKAGE>`.
+
+Because guacd doesn't require a configuration and it doesn't store any data, you can also uninstall and re-install to upgrade your version. 
 
 ## Compile and package yourself
 If you prefer to compile and package yourself, just execute the scripts of the repository on your machine.
@@ -42,7 +47,7 @@ If you prefer to compile and package yourself, just execute the scripts of the r
 To compile and build the Debian packages quickly, proceed as shown below.
 ```
 export DEBIAN_FRONTEND=noninteractive
-git clone https://cloudradar@bitbucket.org/cloudradar/rport-guacamole.git
+git clone https://github.com/realvnc-labs/rport-guacamole.git
 cd port-guacamole
 sh 01-resolve-debian-dependencies.sh
 sh 02-compile-guacamole.sh
